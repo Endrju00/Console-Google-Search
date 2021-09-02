@@ -9,12 +9,14 @@ except ImportError:
 
 
 def create_name():
+    """Return the string (filename) with current datetime."""
     now = datetime.now()
     dt = now.strftime("%d-%m-%Y-%H-%M-%S")
     return f'scraped-links-{dt}.csv'
 
 
 def print_links(pages, links):
+    """Print links on particular pages."""
     counter = 1
     for link in links:
         if counter % 10 == 1:
@@ -24,12 +26,10 @@ def print_links(pages, links):
 
 
 def create_dict(keyword, keys, values):
-    lst = [(keys[0], keyword[:-1])]
+    """Return dict with given keywords and values"""
+    lst = [(keys[0], keyword[:-1])] # Given keyword as a first value
     for i in range(len(values)):
-        if 'www.searchenginejournal.com' in values[i]: # Check if pointing to searchjournal.com
-            lst.append((keys[i+1], values[i]))
-        else:
-            lst.append((keys[i+1], 'not_searchenginejournal'))
+        lst.append((keys[i+1], values[i]))
 
     return dict(lst)
 
