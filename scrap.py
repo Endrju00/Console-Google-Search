@@ -60,7 +60,7 @@ if __name__ == '__main__':
         writer.writeheader()
 
         for keyword in file.readlines():
-            url = f'https://www.searchenginejournal.com/ {keyword}' # Build a query
+            url = f'site:https://www.searchenginejournal.com/ {keyword}' # Build a query
             links = [link for link in search(url, stop=pages * 10)] # Get the results
 
             # Save links to csv file
