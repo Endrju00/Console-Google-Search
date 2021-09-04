@@ -44,3 +44,6 @@ Algorithm is as follows:
 ### Are there any risks associated with using such a program?
 * If there are too many requests or the requests are sent to fast the HTTP Error 429 will be raised. 
 * Google does not allow it. You can get blocked.
+
+# Usage
+![](additional/use.jpg)
