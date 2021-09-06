@@ -44,6 +44,7 @@ Algorithm is as follows:
 * Creating graphs for example how many of the given references actually relate to the keyword.
 ### Are there any risks associated with using such a program?
 * If there are too many requests or the requests are sent to fast the HTTP Error 429 will be raised.
+* There is a limit of queries sent per day - Error 429 will be raised.
 * Google does not allow it. You can get blocked. (Problem can occur when actually scrapping the results by a certain name of div class etc.)
 
 # Technologies
