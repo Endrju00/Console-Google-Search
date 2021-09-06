@@ -27,7 +27,7 @@ Algorithm is as follows:
 3) Run script
    > On linux and Mac
     ```
-    python3 scrap.py num_of_pages
+    python3 scrap.py
     ```
    > On Windows (cmd)
    ```
@@ -48,4 +48,8 @@ Algorithm is as follows:
 * Python libraries: csv, requests, json, datetime
 
 # Usage
-![](additional/use.jpg)
+![](additional/usage.jpg)
+> Total number of results and links are printed in the console.
+###
+![](additional/usage2.jpg)
+> Files with extracted data are created.
