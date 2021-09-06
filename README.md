@@ -23,9 +23,7 @@ Algorithm is as follows:
     venv\Scripts\activate.bat
     ```
 2) Install prerequisites
-   ```
-   pip install google
-   ```
+   > See [technologies](#technologies)
 3) Run script
    > On linux and Mac
     ```
@@ -33,17 +31,21 @@ Algorithm is as follows:
     ```
    > On Windows (cmd)
    ```
-    python scrap.py num_of_pages
+    python scrap.py
     ```
-4) Results are printed in the console and saved in .csv file.
+4) Results are printed in the console and saved in .csv file. Also the total number of results for the keyword is saved (in a different file but with the same datetime stamp).
 
 # Questions
 ### Ideas on how the software can be improved in the future.
 * Automatic navigation to the pages in the browser.
 * Creating graphs for example how many of the given references actually relate to the keyword.
 ### Are there any risks associated with using such a program?
-* If there are too many requests or the requests are sent to fast the HTTP Error 429 will be raised. 
-* Google does not allow it. You can get blocked.
+* If there are too many requests or the requests are sent to fast the HTTP Error 429 will be raised.
+* Google does not allow it. You can get blocked. (Problem can occur when actually scrapping the results by a certain name of div class etc.)
+
+# Technologies
+* Custom search engine set to www.searchenginejournal.com (script is already using mine)
+* Python libraries: csv, requests, json, datetime
 
 # Usage
 ![](additional/use.jpg)
