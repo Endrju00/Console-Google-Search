@@ -23,6 +23,9 @@ Algorithm is as follows:
     venv\Scripts\activate.bat
     ```
 2) Install prerequisites
+   ```
+   pip install -r requirements.txt
+   ```
    > See [technologies](#technologies)
 3) Run script
    > On linux and Mac
