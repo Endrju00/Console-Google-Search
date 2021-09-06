@@ -52,7 +52,7 @@ Algorithm is as follows:
 * Python libraries: csv, requests, json, datetime
 
 # Usage
-![](additional/usage.jpg)
+![](additional/usage1.jpg)
 > Total number of results and links are printed in the console.
 ###
 ![](additional/usage2.jpg)
