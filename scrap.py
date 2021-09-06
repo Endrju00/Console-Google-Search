@@ -1,28 +1,26 @@
 import sys
 import csv
 from datetime import datetime
+import requests
+import json
 
-try:
-    from googlesearch import search
-except ImportError:
-    print("No module named 'google' found.")
+# GLOBAL VARIABLES
+API_KEY = open('.api_key').read()
+CX = '7929aaa645c6089dc'
+PAGES = 1 # Script does not work for more pages
 
 
 def create_name():
     """Return the string (filename) with current datetime."""
     now = datetime.now()
     dt = now.strftime("%d-%m-%Y-%H-%M-%S")
-    return f'scraped-links-{dt}.csv'
+    return f'{dt}.csv'
 
 
-def print_links(pages, links):
+def print_links(links):
     """Print links on particular pages."""
-    counter = 1
     for link in links:
-        if counter % 10 == 1:
-            print(f'Page {counter // 10 + 1} of {pages}')
         print(link)
-        counter += 1
 
 
 def create_dict(keyword, keys, values):
@@ -36,16 +34,6 @@ def create_dict(keyword, keys, values):
 
 
 if __name__ == '__main__':
-    # Get num of pages
-    try:
-        pages = int(sys.argv[1])
-    except IndexError:
-        pages = 1
-        print("WARNING: No argument passed, number of pages set to 1.\n")
-    except ValueError:
-        print("ERROR: You should pass an integer as an argument.")
-        exit()
-
     # Open the keywords.txt
     try:
         file = open('keywords.txt')
@@ -53,22 +41,39 @@ if __name__ == '__main__':
         print("ERROR: Could not open the keyword.txt. Please check if it is in current directory.")
         exit()
 
-    # Open or create csv file
-    with open(create_name(), mode='w') as csv_file:
-        fieldnames = ['keyword'] + [f'link{x+1}' for x in range(pages*10)] # Generate fieldnames
+    # Open or create csv file for links
+    name = create_name()
+    with open(f'scrapedLinks-{name}', mode='w') as csv_file:
+        fieldnames = ['keyword'] + [f'link{x+1}' for x in range(PAGES*10)] # Generate fieldnames
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
 
-        for keyword in file.readlines():
-            url = f'site:https://www.searchenginejournal.com/ {keyword}' # Build a query
-            links = [link for link in search(url, stop=pages * 10)] # Get the results
+        # Open or create csv file for totalResults
+        with open(f'totalResults-{name}', mode='w') as csv_file:
+            fieldnames2 = ['keyword', 'totalResults'] # Generate fieldnames
+            writer2 = csv.DictWriter(csv_file, fieldnames=fieldnames2)
+            writer2.writeheader()
 
-            # Save links to csv file
-            data = create_dict(keyword, fieldnames, links)
-            writer.writerow(data)
+            # Read the keywords
+            for keyword in file.readlines():
+                url = f'https://www.googleapis.com/customsearch/v1?q={keyword}&key={API_KEY}&cx={CX}' # Build a query
+                r = requests.get(url) # Get the results
+                data = r.json() # Save in json format
 
-            # Print links associated with the given query
-            print(f'\nResults for keyword: {keyword}')
-            print_links(pages, links)
+                # Get the number of results and save them in csv file with the keyword
+                totalResults = data['queries']['request'][0]['totalResults']
+                writer2.writerow({'keyword': keyword[:-1], 'totalResults': totalResults})
+
+                # Get the links
+                links = [item['link'] for item in data['items']]
+
+                # Save links to csv file
+                d = create_dict(keyword, fieldnames, links)
+                writer.writerow(d)
+
+                # Print links associated with the given query
+                print(f'\nTotal number of results: {totalResults}')
+                print(f'Results for keyword: {keyword}')
+                print_links(links)
 
     file.close()
