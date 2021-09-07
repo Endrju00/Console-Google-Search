@@ -30,11 +30,11 @@ Algorithm is as follows:
 3) Run script
    > On linux and Mac
     ```
-    python3 scrap.py
+    python3 scrap.py num_of_pages (if not passed set to 1)
     ```
    > On Windows (cmd)
    ```
-    python scrap.py
+    python scrap.py num_of_pages (if not passed set to 1)
     ```
 4) Results are printed in the console and saved in .csv file. Also the total number of results for the keyword is saved (in a different file but with the same datetime stamp).
 
