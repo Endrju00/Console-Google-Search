@@ -1,4 +1,4 @@
-# ONELY Intern tasks - scraping
+# Console Google search
 Algorithm is as follows:
 1. The program is looping through a list of keywords in the .txt file (keywords.txt)
 2. Then it queries Google.com using the following set of queries: site:https://www.searchenginejournal.com/ {keyword}
@@ -38,7 +38,6 @@ Algorithm is as follows:
     ```
 4) Results are printed in the console and saved in .csv file. Also the total number of results for the keyword is saved (in a different file but with the same datetime stamp).
 
-# Questions
 ### Ideas on how the software can be improved in the future.
 * Automatic navigation to the pages in the browser.
 * Creating graphs for example how many of the given references actually relate to the keyword.
